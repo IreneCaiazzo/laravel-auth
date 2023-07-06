@@ -24,8 +24,8 @@ class ProjectsTableSeeder extends Seeder
 
 
                 'title' => $faker->words(rand(2, 10), true),
-                'repo' => $faker->words(rand(2, 10), true),
                 'description' => $faker->paragraphs(rand(2, 20), true),
+                'repo' => $faker->words(rand(2, 10), true),
             ]);
         }
     }
