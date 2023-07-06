@@ -19,10 +19,10 @@ use App\Http\Controllers\Guest\PageController as GuestPageController;
 
 
 Route::get('/', [GuestPageController::class, 'home'])->name('guest.home');
-Route::get('/admin', [AdminPageController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('admin.dashboard');
+//Route::get('/admin', [AdminPageController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('admin.dashboard');
 
 Route::middleware('auth', 'verified')
-    ->name('admin')
+    ->name('admin.')
     ->prefix('admin')
     ->group(function () {
         Route::get('/', [AdminPageController::class, 'dashboard'])->name('dashboard');
@@ -30,10 +30,14 @@ Route::middleware('auth', 'verified')
     });
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+Route::middleware('auth')
+    ->name('admin.')
+    ->prefix('admin')
+    ->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
+
 
 require __DIR__ . '/auth.php';
