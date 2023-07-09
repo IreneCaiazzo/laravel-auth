@@ -47,43 +47,45 @@
                     <td>
                         <a class="btn btn-primary" href="{{ route('admin.projects.show', ['project' => $project]) }}">View</a>
                         <a class="btn btn-warning" href="{{ route('admin.projects.edit', ['project' => $project]) }}">Edit</a>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                            Delete
+                        <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $project->id}}">
+                        Delete
                         </button>
 
-                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="deleteModalLabel">Delete confirmation</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-
-                                    <div class="modal-body">
-                                        Are you sure?
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                        
-                                        <form
-                                            action="{{ route('admin.projects.destroy', ['project' => $project]) }}"
-                                            method="project"
-                                            class="d-inline-block"
-                                        >
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger">Yes</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete confirmation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    Are you sure?
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    
+                    <form
+                        action=""
+                        data-template="{{ route('admin.projects.destroy', ['project' => '*****']) }}"
+                        method="post"
+                        class="d-inline-block"
+                        id="confirm-delete"
+                    >
+                        @csrf
+                        @method('delete')
+                        <button class="btn btn-danger">Yes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{ $projects->links() }}
 
